@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class CarroCLI {
     private int opcaoIniciar;
-    private Carro carro = new Carro();
+    private Carro carro;
     private Scanner scanner = new Scanner(System.in);
 
     public void iniciar(){
@@ -36,9 +36,11 @@ public class CarroCLI {
     }
 
     public void menuDentroDoCarro(){
+
             while (true) {
                 System.out.println("--------------------");
                 System.out.println("VOCE ENTROU NO CARRO");
+                carro = new Carro();
                 System.out.println("--------------------");
                 System.out.println("");
                 System.out.println("1 - Ligar carro ");
@@ -47,10 +49,11 @@ public class CarroCLI {
                 int opcaoNoCarro = Integer.parseInt(scanner.nextLine());
 
                 if (opcaoNoCarro == 1){
+                    carro.ligar();
                     menuComandos();
                 }
                 else if(opcaoNoCarro == 2){
-                    iniciar();
+                    return;
                 }
                 else{
                     System.out.println("OPCAO INVALIDA");
@@ -70,12 +73,12 @@ public class CarroCLI {
             System.out.println("7 - Passar marcha ");
         
             try{
-                comando = Integer.parseInt(scanner.nextLine());
+                int comando = Integer.parseInt(scanner.nextLine());
                 System.out.println("");
                 switch (comando) {
                     case 1:
                         carro.desligar();
-                        break;
+                        return;
                     case 2:
                         carro.acelerar();
                         break;
@@ -89,10 +92,14 @@ public class CarroCLI {
                         carro.virarDireita();
                         break;
                     case 6:
-                        carro.getvelocidade();
+                        System.out.printf("VELOCIDADE ATUAL: %s\n",carro.getvelocidade() + "KM/H");
+                        System.out.println("");
                         break;
                     case 7:
                         carro.passaMarcha();
+                        break;
+                    case 8:
+                        carro.reduzirMarcha();
                         break;
                 
                     default:
